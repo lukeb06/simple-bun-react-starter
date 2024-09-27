@@ -1,7 +1,6 @@
 import { Hono } from 'hono';
 
 const app = new Hono();
-const ok = true;
 
 app.use('*', async (c, next) => {
 	c.res.headers.set('Access-Control-Allow-Origin', '*');
