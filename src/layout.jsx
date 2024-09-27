@@ -4,13 +4,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import '@/global.css';
 import '@/index.scss';
 
-import { ThemeProvider } from '@/components/theme-provider.jsx';
-import { StoreProvider } from '@/hooks/use-store.jsx';
-import { LocalStorageProvider } from '@/hooks/use-local-storage.jsx';
+import { ThemeProvider } from '@/components/theme-provider';
+import { StoreProvider } from '@/hooks/use-store';
+import { LocalStorageProvider } from '@/hooks/use-local-storage';
 
-import Home from '@/pages/Home.jsx';
+import Home from '@/pages/Home';
 
-import Navbar from '@/components/Navbar.jsx';
+import Navbar from '@/components/Navbar';
 
 const ROOT = document.getElementById('root');
 

@@ -9,10 +9,10 @@ import {
 
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
-import { ModeToggle } from '@/components/mode-toggle.jsx';
+import { ModeToggle } from '@/components/mode-toggle';
 import { Button } from '@/components/ui/button';
 
-import { useMediaQuery, query } from '@/hooks/use-media-query.js';
+import { useMediaQuery, query } from '@/hooks/use-media-query';
 
 import { Menu } from 'lucide-react';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import APIStatus from '@/components/APIStatus.jsx';
+import APIStatus from '@/components/APIStatus';
 
 const Home = () => {
 	return (

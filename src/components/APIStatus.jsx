@@ -1,5 +1,5 @@
 import useAPI from '@/hooks/use-api';
-import LoadSpinner from '@/components/LoadSpinner.jsx';
+import LoadSpinner from '@/components/LoadSpinner';
 
 const APIStatus = () => {
 	const { data: status, error, isLoading } = useAPI('status', 'TEXT');
