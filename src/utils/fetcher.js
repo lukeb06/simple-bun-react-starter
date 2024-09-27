@@ -55,8 +55,7 @@ class Fetcher {
 				});
 				if (!response.ok) throw new Error(response.statusText);
 
-				if (responseMode === Fetcher.ResponseMode.RES)
-					return resolve(response);
+				if (responseMode === Fetcher.ResponseMode.RES) return resolve(response);
 
 				const data =
 					responseMode === Fetcher.ResponseMode.TEXT
@@ -81,11 +80,7 @@ class Fetcher {
 		return Fetcher.request(path, 'PUT', options, responseMode);
 	}
 
-	static delete(
-		path,
-		options = {},
-		responseMode = Fetcher.ResponseMode.JSON,
-	) {
+	static delete(path, options = {}, responseMode = Fetcher.ResponseMode.JSON) {
 		return Fetcher.request(path, 'DELETE', options, responseMode);
 	}
 }

@@ -17,7 +17,7 @@ app.use('*', async (c, next) => {
 });
 
 app.get('/status', c => {
-	return c.json({ ok });
+	return c.text('OK', 200);
 });
 
 export default app;
