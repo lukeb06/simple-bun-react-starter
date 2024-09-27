@@ -51,7 +51,7 @@
 	},
 	"nodemonConfig": {
 		"ignore": [
-			"*.json"
+			"*.db"
 		]
 	},
 	"module": "index.ts",
