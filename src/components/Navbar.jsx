@@ -110,7 +110,7 @@ const MobileNavbar = () => {
 			<NavigationMenuList className="w-full justify-normal">
 				<NavigationMenuItem>
 					<Sheet>
-						<Button asChild variant="outline" size="icon">
+						<Button asChild variant="ghost" size="icon">
 							<SheetTrigger>
 								<Menu />
 							</SheetTrigger>
