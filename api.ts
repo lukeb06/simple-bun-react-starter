@@ -1,32 +1,24 @@
-import { JSONResponse } from './JSONResponse';
-
+import { Hono } from 'hono';
 const PORT = process.env.PORT;
 const ok = true;
 
-Bun.serve({
-	port: PORT,
-	fetch(req) {
-		const url = new URL(req.url);
+const app = new Hono();
 
-		const headers = {
-			'Access-Control-Allow-Origin': '*',
-			'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-			'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-			'Access-Control-Allow-Credentials': 'true',
-		};
+app.use('*', async (c, next) => {
+	c.res.headers.set('Access-Control-Allow-Origin', '*');
+	c.res.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+	c.res.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+	c.res.headers.set('Access-Control-Allow-Credentials', 'true');
 
-		if (req.method === 'OPTIONS') {
-			return new Response(null, { status: 200, headers });
-		}
+	if (c.req.method === 'OPTIONS') {
+		return c.text('', 200);
+	}
 
-		if (req.method === 'GET') {
-			if (url.pathname === '/status') {
-				return new JSONResponse({ ok }, { headers });
-			}
-		}
-
-		return new Response('Not Found', { status: 404, headers });
-	},
+	await next();
 });
 
-console.log(`API active on port ${PORT}`);
+app.get('/status', c => {
+	return c.json({ ok });
+});
+
+export default app;
