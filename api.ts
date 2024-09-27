@@ -1,9 +1,8 @@
 import { Hono } from 'hono';
 
+const app = new Hono();
 const PORT = process.env.PORT;
 const ok = true;
-
-const app = new Hono();
 
 app.use('*', async (c, next) => {
 	c.res.headers.set('Access-Control-Allow-Origin', '*');
