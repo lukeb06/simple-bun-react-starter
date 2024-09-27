@@ -54,7 +54,7 @@
 			"*.db"
 		]
 	},
-	"module": "index.ts",
+	"module": "api.ts",
 	"peerDependencies": {
 		"typescript": "^5.0.0"
 	}
