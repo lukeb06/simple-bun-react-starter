@@ -1,14 +1,8 @@
 import { useState, useEffect } from 'react';
 
-import Fetcher from '@/utils/fetcher.js';
+import Fetcher from '@/utils/fetcher';
 
-const responseModeMap = {
-	JSON: Fetcher.ResponseMode.JSON,
-	TEXT: Fetcher.ResponseMode.TEXT,
-	RES: Fetcher.ResponseMode.RES,
-};
-
-function useAPI(url, responseMode = 'JSON') {
+function useAPI(url, responseMode: 'JSON' | 'TEXT' | 'RES' = 'JSON') {
 	const [data, setData] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -22,9 +16,11 @@ function useAPI(url, responseMode = 'JSON') {
 
 		const fetchData = async () => {
 			try {
-				const _data = await Fetcher.get(url, {}, responseModeMap[responseMode]);
-				if (_data.error) {
-					throw new Error(_data.error);
+				const _data = await Fetcher.get(url, {}, responseMode);
+				if (_data instanceof Object && !(_data instanceof Response) && _data.error) {
+					if (_data.error instanceof Error) throw _data.error;
+					if (typeof _data.error === 'string') throw new Error(_data.error);
+					throw new Error('Unknown error');
 				}
 				setData(_data);
 				setIsLoading(false);

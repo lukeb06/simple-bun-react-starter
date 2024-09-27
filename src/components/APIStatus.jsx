@@ -1,4 +1,4 @@
-import useAPI from '@/hooks/use-api.js';
+import useAPI from '@/hooks/use-api';
 import LoadSpinner from '@/components/LoadSpinner.jsx';
 
 const APIStatus = () => {

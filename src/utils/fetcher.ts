@@ -26,21 +26,17 @@ const generateEndpoint = async () => {
 };
 
 class Fetcher {
-	static ResponseMode = {
-		JSON: 'json',
-		TEXT: 'text',
-		RES: 'res',
-	};
-
 	static defaultOptions = {};
 	static defaultHeaders = {};
 
 	static async request(
 		path,
 		method = 'GET',
-		options = {},
-		responseMode = Fetcher.ResponseMode.JSON,
-	) {
+		options = {} as {
+			headers?: Record<string, string>;
+		},
+		responseMode: 'JSON' | 'TEXT' | 'RES' = 'JSON',
+	): Promise<string | Record<string, unknown> | Response> {
 		if (endpoint == null) await generateEndpoint();
 		return new Promise(async (resolve, reject) => {
 			try {
@@ -55,32 +51,32 @@ class Fetcher {
 				});
 				if (!response.ok) throw new Error(response.statusText);
 
-				if (responseMode === Fetcher.ResponseMode.RES) return resolve(response);
+				if (responseMode === 'RES') return resolve(response);
 
 				const data =
-					responseMode === Fetcher.ResponseMode.TEXT
-						? await response.text()
-						: await response.json();
+					responseMode === 'TEXT' ? await response.text() : await response.json();
 				resolve(data);
 			} catch (e) {
-				reject(e);
+				if (typeof e === 'string') return reject(new Error(e));
+				if (e instanceof Error) return reject(e);
+				reject(new Error('Unknown error'));
 			}
 		});
 	}
 
-	static get(path, options = {}, responseMode = Fetcher.ResponseMode.JSON) {
+	static get(path, options = {}, responseMode: 'JSON' | 'TEXT' | 'RES' = 'JSON') {
 		return Fetcher.request(path, 'GET', options, responseMode);
 	}
 
-	static post(path, options = {}, responseMode = Fetcher.ResponseMode.JSON) {
+	static post(path, options = {}, responseMode: 'JSON' | 'TEXT' | 'RES' = 'JSON') {
 		return Fetcher.request(path, 'POST', options, responseMode);
 	}
 
-	static put(path, options = {}, responseMode = Fetcher.ResponseMode.JSON) {
+	static put(path, options = {}, responseMode: 'JSON' | 'TEXT' | 'RES' = 'JSON') {
 		return Fetcher.request(path, 'PUT', options, responseMode);
 	}
 
-	static delete(path, options = {}, responseMode = Fetcher.ResponseMode.JSON) {
+	static delete(path, options = {}, responseMode: 'JSON' | 'TEXT' | 'RES' = 'JSON') {
 		return Fetcher.request(path, 'DELETE', options, responseMode);
 	}
 }
