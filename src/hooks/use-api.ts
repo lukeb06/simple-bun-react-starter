@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 
 import Fetcher from '@/utils/fetcher';
 
-function useAPI(url, responseMode: 'JSON' | 'TEXT' | 'RES' = 'JSON') {
-	const [data, setData] = useState(null);
+function useAPI(url: string, responseMode: 'JSON' | 'TEXT' | 'RES' = 'JSON') {
+	const [data, setData] = useState<string | Record<string, unknown> | Response | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
-	const [error, setError] = useState(null);
+	const [error, setError] = useState<string | null>(null);
 	const [refresh, setRefresh] = useState(Math.random());
 
 	const doRefresh = () => setRefresh(Math.random());
@@ -25,7 +25,14 @@ function useAPI(url, responseMode: 'JSON' | 'TEXT' | 'RES' = 'JSON') {
 				setData(_data);
 				setIsLoading(false);
 			} catch (error) {
-				setError(error?.message || error);
+				if (error instanceof Error) {
+					setError(error.message);
+				} else if (typeof error === 'string') {
+					setError(error);
+				} else {
+					setError('Unknown error');
+				}
+
 				setIsLoading(false);
 			}
 		};

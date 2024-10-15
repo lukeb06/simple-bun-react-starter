@@ -1,4 +1,4 @@
-const breakpoint = str => {
+const breakpoint = (str: string) => {
 	if (str === 'sm' && window.innerWidth >= 640) return true;
 	if (str === 'md' && window.innerWidth >= 768) return true;
 	if (str === 'lg' && window.innerWidth >= 1024) return true;

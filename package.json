@@ -6,7 +6,7 @@
 		"dev": "concurrently --kill-others \"npm run vite:dev\" \"npm run nodemon\"",
 		"nodemon": "bun --watch run api.ts",
 		"build": "vite build",
-		"lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+		"lint": "eslint .",
 		"pretty": "npx prettier . --write",
 		"vite:preview": "vite preview",
 		"preview": "vite preview --host --port 5170",
@@ -29,22 +29,25 @@
 		"tailwindcss-animate": "^1.0.7"
 	},
 	"devDependencies": {
+		"@eslint/js": "^9.11.1",
+		"@types/bun": "latest",
 		"@types/node": "^20.12.7",
 		"@types/react": "^18.2.66",
 		"@types/react-dom": "^18.2.22",
 		"@vitejs/plugin-react": "^4.2.1",
 		"autoprefixer": "^10.4.19",
 		"concurrently": "^8.2.2",
-		"eslint": "^8.57.0",
-		"eslint-plugin-react": "^7.34.1",
+		"eslint": "^9.11.1",
+		"eslint-plugin-react": "^7.37.0",
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-react-refresh": "^0.4.6",
+		"globals": "^15.9.0",
 		"postcss": "^8.4.38",
 		"prettier": "^3.2.5",
 		"sass": "^1.75.0",
 		"tailwindcss": "^3.4.3",
-		"vite": "^5.2.0",
-		"@types/bun": "latest"
+		"typescript-eslint": "^8.7.0",
+		"vite": "^5.2.0"
 	},
 	"module": "api.ts",
 	"peerDependencies": {

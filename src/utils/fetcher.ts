@@ -1,7 +1,7 @@
 let API_PORT;
 let API_URL = sessionStorage.getItem(btoa('API_URL'));
 if (API_URL) API_URL = atob(API_URL);
-let endpoint = null;
+let endpoint: ((path: string) => string) | null = null;
 
 if (API_URL) endpoint = path => `${API_URL}${path}`;
 
@@ -30,7 +30,7 @@ class Fetcher {
 	static defaultHeaders = {};
 
 	static async request(
-		path,
+		path: string,
 		method = 'GET',
 		options = {} as {
 			headers?: Record<string, string>;
@@ -40,6 +40,8 @@ class Fetcher {
 		if (endpoint == null) await generateEndpoint();
 		return new Promise(async (resolve, reject) => {
 			try {
+				if (endpoint == null) throw new Error('API endpoint not found');
+
 				const response = await fetch(endpoint(path), {
 					method,
 					...Fetcher.defaultOptions,
@@ -64,19 +66,19 @@ class Fetcher {
 		});
 	}
 
-	static get(path, options = {}, responseMode: 'JSON' | 'TEXT' | 'RES' = 'JSON') {
+	static get(path: string, options = {}, responseMode: 'JSON' | 'TEXT' | 'RES' = 'JSON') {
 		return Fetcher.request(path, 'GET', options, responseMode);
 	}
 
-	static post(path, options = {}, responseMode: 'JSON' | 'TEXT' | 'RES' = 'JSON') {
+	static post(path: string, options = {}, responseMode: 'JSON' | 'TEXT' | 'RES' = 'JSON') {
 		return Fetcher.request(path, 'POST', options, responseMode);
 	}
 
-	static put(path, options = {}, responseMode: 'JSON' | 'TEXT' | 'RES' = 'JSON') {
+	static put(path: string, options = {}, responseMode: 'JSON' | 'TEXT' | 'RES' = 'JSON') {
 		return Fetcher.request(path, 'PUT', options, responseMode);
 	}
 
-	static delete(path, options = {}, responseMode: 'JSON' | 'TEXT' | 'RES' = 'JSON') {
+	static delete(path: string, options = {}, responseMode: 'JSON' | 'TEXT' | 'RES' = 'JSON') {
 		return Fetcher.request(path, 'DELETE', options, responseMode);
 	}
 }

@@ -5,12 +5,12 @@ import {
 	NavigationMenu,
 	NavigationMenuItem,
 	NavigationMenuList,
-} from '@/components/ui/navigation-menu';
+} from '@/components/ui2/navigation-menu';
 
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui2/sheet';
 
 import { ModeToggle } from '@/components/mode-toggle';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui2/button';
 
 import { useMediaQuery, query } from '@/hooks/use-media-query';
 
